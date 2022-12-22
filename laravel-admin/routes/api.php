@@ -18,8 +18,14 @@ use App\Http\Controllers\backsite\AuthController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::post('login',[AuthController::class,'Login']);
+Route::post('login',[AuthController::class,'Login'])->name('login');
+Route::post('register',[AuthController::class,'Register']);
 Route::group(['middleware'=>'auth:api'],function(){
+    Route::get('user',[UserController::class,'user']);
+    Route::put('user/info',[UserController::class,'userInfo']);
+    Route::put('user/password',[UserController::class,'userPassword']);
+    
+    
     Route::get('users',[UserController::class,'index']);
     Route::get('user/{id}',[UserController::class,'show']);
     Route::post('user',[UserController::class,'store']);
