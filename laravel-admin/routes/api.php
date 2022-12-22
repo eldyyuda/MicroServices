@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backsite\UserController;
 use App\Http\Controllers\backsite\AuthController;
+use App\Http\Controllers\RoleController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +33,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::post('user',[UserController::class,'store']);
     Route::put('user/{id}',[UserController::class,'update']);
     Route::delete('user/{id}',[UserController::class,'destroy']);
+    Route::apiResource('roles',RoleController::class);
 });
 
 
