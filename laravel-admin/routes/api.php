@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backsite\UserController;
 use App\Http\Controllers\backsite\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Backsite\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::put('user/{id}',[UserController::class,'update']);
     Route::delete('user/{id}',[UserController::class,'destroy']);
     Route::apiResource('roles',RoleController::class);
+    Route::apiResource('products',ProductController::class);
+
 });
 
 

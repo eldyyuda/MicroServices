@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backsite;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backsite\StoreUserRequest;
 use App\Http\Requests\Backsite\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -15,11 +16,13 @@ class UserController extends Controller
 {
     public function index()
     {
-       return User::paginate();
+       $user=User::paginate();
+       return UserResource::collection($user);
     }
-    public function show(User $id)
+    public function show($id)
     {
-        return $id;
+        $user = User::find($id);
+        return new UserResource($user);
     }
     public function store(StoreUserRequest $request)
     {
@@ -30,7 +33,7 @@ class UserController extends Controller
             'password'=>Hash::make($request->input('password'))
         ];
         $user= User::create($input);
-        return response($user,Response::HTTP_CREATED);
+        return response(new UserResource($user),Response::HTTP_CREATED);
     }
     public function update(User $id, UpdateUserRequest $request)
     {
@@ -43,23 +46,23 @@ class UserController extends Controller
         $id->update(
             $request->only('first_name','last_name','email')
             +['password'=>Hash::make($request->input('password'))]);
-        return response($id,Response::HTTP_ACCEPTED);
+        return response(new UserResource($id),Response::HTTP_ACCEPTED);
     }
     public function destroy(User $id)
     {
         $id->delete();
-        $content="Success Deleted";
-        return response($content,Response::HTTP_NO_CONTENT);
+        return response(new UserResource($id),Response::HTTP_NO_CONTENT);
     }
     public function user()
     {
-        return Auth::user();
+        
+        return new UserResource(Auth::user());
     }
     public function userInfo(Request $request)
     {
         $user = Auth::user();
         $user->update($request->only('first_name','last_name','email'));
-        return response($user,Response::HTTP_ACCEPTED); 
+        return response(new UserResource($user),Response::HTTP_ACCEPTED); 
     }
     public function userPassword(Request $request)
     {
@@ -67,6 +70,6 @@ class UserController extends Controller
         $user->update([
             'password'=>Hash::make($request->input('password'))
         ]);
-        return response($user,Response::HTTP_ACCEPTED);
+        return response(new UserResource($user),Response::HTTP_ACCEPTED);
     }
 }

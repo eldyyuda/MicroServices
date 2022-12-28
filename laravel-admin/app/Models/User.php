@@ -36,6 +36,9 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $role_id
+ * @property-read \App\Models\Role $role
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
  */
 class User extends Authenticatable
 {
@@ -48,10 +51,7 @@ class User extends Authenticatable
      */
     protected $guarded =['id'];
     // protected $fillable = [
-    //     'first_name',
-    //     'last_name',
-    //     'email',
-    //     'password',
+    //     'role_id'
     // ];
 
     /**
@@ -72,4 +72,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
