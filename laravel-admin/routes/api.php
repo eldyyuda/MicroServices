@@ -6,7 +6,7 @@ use App\Http\Controllers\backsite\UserController;
 use App\Http\Controllers\backsite\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Backsite\ProductController;
-
+use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +27,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::get('user',[UserController::class,'user']);
     Route::put('user/info',[UserController::class,'userInfo']);
     Route::put('user/password',[UserController::class,'userPassword']);
+    Route::post('upload',[ImageController::class,'upload']);
     
     
     Route::get('users',[UserController::class,'index']);

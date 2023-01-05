@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -33,14 +34,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $file=$request->file('image');
-        $name=Str::random(10);
-        $url=Storage::putFileAs('public/images',$file,$name.'.'.$file->extension());
+        
         $product=Product::create([
-            'title'=>$request->input('title'),
-            'description'=>$request->input('description'),
-            'image'=>$url,
-            'price'=>$request->input('price'),
+            $request->only('title','description','image','price')
         ]);
         return response(new ProductResource($product),Response::HTTP_ACCEPTED);
 
