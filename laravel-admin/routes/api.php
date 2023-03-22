@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backsite\UserController;
-use App\Http\Controllers\backsite\AuthController;
+use App\Http\Controllers\Backsite\UserController;
+use App\Http\Controllers\Backsite\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Backsite\ProductController;
 use App\Http\Controllers\ImageController;
@@ -28,7 +28,6 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::put('user/info',[UserController::class,'userInfo']);
     Route::put('user/password',[UserController::class,'userPassword']);
     Route::post('upload',[ImageController::class,'upload']);
-    
     
     Route::get('users',[UserController::class,'index']);
     Route::get('user/{id}',[UserController::class,'show']);

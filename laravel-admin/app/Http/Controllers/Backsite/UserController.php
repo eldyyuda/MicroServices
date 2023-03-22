@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backsite;
+namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backsite\StoreUserRequest;
