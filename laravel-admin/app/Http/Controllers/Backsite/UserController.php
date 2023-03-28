@@ -37,15 +37,16 @@ class UserController extends Controller
     }
     public function update(User $id, UpdateUserRequest $request)
     {
-        // $id->update([
-        //     'first_name'=>$request->input('first_name'),
-        //     'last_name'=>$request->input('last_name'),
-        //     'email'=>$request->input('email'),
-        //     'password'=>Hash::make($request->input('password'))
-        // ]);
-        $id->update(
-            $request->only('first_name','last_name','email')
-            +['password'=>Hash::make($request->input('password'))]);
+        $id->update([
+            'first_name'=>$request->input('first_name'),
+            'last_name'=>$request->input('last_name'),
+            'email'=>$request->input('email'),
+            'password'=>Hash::make($request->input('password'))
+        ]);
+
+        // $id->update(
+        //     $request->only('first_name','last_name','email')
+        //     +['password'=>Hash::make($request->input('password'))]);
         return response(new UserResource($id),Response::HTTP_ACCEPTED);
     }
     public function destroy(User $id)

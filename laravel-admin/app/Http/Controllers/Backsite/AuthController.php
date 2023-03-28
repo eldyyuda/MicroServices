@@ -21,7 +21,7 @@ class AuthController extends Controller
             $token = $user->createToken('admin')->accessToken;
             return [
                 'token'=>$token
-                ];
+            ];
         }
         return response([
             'error'=> 'Invalided Credential',Response::HTTP_UNAUTHORIZED

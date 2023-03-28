@@ -34,10 +34,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request->all());
-        $product=Product::create([
-            $request->only('title','description','image','price')
-        ]);
+        // dd($request->all());
+        $input= [
+                'title'=>$request->input('title'),
+                'description'=>$request->input('description'),
+                'image'=>$request->input('image'),
+                'price'=>$request->input('price'),
+        ];
+
+        $product=Product::create($input
+            // $request->only('title','description','image','price')
+        );
         return response(new ProductResource($product),Response::HTTP_CREATED);
 
     }
@@ -63,9 +70,16 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product= Product::find($id);
-        $product->update([
-            $request->only('title','description','image','price')
-        ]);
+        $input= [
+            'title'=>$request->input('title'),
+            'description'=>$request->input('description'),
+            'image'=>$request->input('image'),
+            'price'=>$request->input('price'),
+    ];
+        $product->update(
+            $input
+            // $request->only('title','description','image','price')
+        );
         return response(new ProductResource($product),Response::HTTP_ACCEPTED);
     }
 
