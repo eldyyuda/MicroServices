@@ -6,6 +6,7 @@ use App\Http\Controllers\Backsite\UserController;
 use App\Http\Controllers\Backsite\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Backsite\ProductController;
+use App\Http\Controllers\Backsite\OrderController;
 use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::delete('user/{id}',[UserController::class,'destroy']);
     Route::apiResource('roles',RoleController::class);
     Route::apiResource('products',ProductController::class);
+    Route::apiResource('orders',OrderController::class)->only('index','show');
 
 });
 
