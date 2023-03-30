@@ -26,6 +26,7 @@ Route::post('login',[AuthController::class,'Login'])->name('login');
 Route::post('register',[AuthController::class,'Register']);
 Route::group(['middleware'=>'auth:api'],function(){
     Route::get('user',[UserController::class,'user']);
+    Route::get('export',[OrderController::class,'export']);
     Route::put('user/info',[UserController::class,'userInfo']);
     Route::put('user/password',[UserController::class,'userPassword']);
     Route::post('upload',[ImageController::class,'upload']);
